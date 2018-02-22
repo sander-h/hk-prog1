@@ -1,4 +1,4 @@
-"# hk-prog1"   
+# hk-prog1  
 git init  
 git remote add origin https://github.com/sander-h/hk-prog1.git  
 git pull  
