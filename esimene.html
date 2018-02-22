@@ -9,23 +9,40 @@
         <h1 id = 'title'></h1>
         <input type="text" id="tekst">
         <button id="nupp">Vajuta siia</button>
+        <div id='div1'></div>
+        
         <script>
+
+            // getting html elements with js
             var tekstikast = document.getElementById("tekst");
             var nupp = document.getElementById("nupp");
+
+            // event listener for element
             nupp.addEventListener("click",function(e){
                 console.log(e);
                 alert(tekstikast.value);
             });
+
+            // function
             var fn = function(tekst = 'tere'){
                 console.log(tekst);
             };
             let arv2 = 2;
+
+            // array and loop
             var array1 = new Array();
             var array2 = [1,'abc',[],true];
             for (var i = 0; i < array2.length; i++) {
                 console.log(array2[i]);
             };
             document.getElementById('title').innerHTML = document.title;
+            
+            // html elemendi lisamine
+            var link = document.createElement('a');
+            link.innerHTML = 'See on link.';
+            link.href = 'https://google.com';
+            document.body.appendChild(link);
+            div1.appendChild(link.cloneNode(true));
         </Script>
     </body>
 </html>
