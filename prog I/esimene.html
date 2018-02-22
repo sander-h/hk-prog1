@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>Esimene</title>
+    </head>
+    <body>
+        <h1 id = 'title'></h1>
+        <input type="text" id="tekst">
+        <button id="nupp">Vajuta siia</button>
+        <script>
+            var tekstikast = document.getElementById("tekst");
+            var nupp = document.getElementById("nupp");
+            nupp.addEventListener("click",function(e){
+                console.log(e);
+                alert(tekstikast.value);
+            });
+            var fn = function(tekst = 'tere'){
+                console.log(tekst);
+            };
+            let arv2 = 2;
+            var array1 = new Array();
+            var array2 = [1,'abc',[],true];
+            for (var i = 0; i < array2.length; i++) {
+                console.log(array2[i]);
+            };
+            document.getElementById('title').innerHTML = document.title;
+        </Script>
+    </body>
+</html>
