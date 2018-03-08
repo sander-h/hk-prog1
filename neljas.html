@@ -13,6 +13,14 @@
     <body>        
         <canvas id='canvas' width="500" height="500"></canvas>
         <script>
+            function getDist(obj1,obj2) {
+                var kaugusx = pall1.x - pall2.x;
+                var kaugusy = pall1.y - pall2.y;
+
+                var kaugus = Math.sqrt((kaugusx*kaugusx)+(kaugusy*kaugusy))-(pall1.r+pall2.r);
+            };
+
+
             var canvas = document.getElementById('canvas')
             var ctx = canvas.getContext('2d');
             
@@ -23,9 +31,17 @@
             var canvasXMax = canvasX+canvas.width;
             var canvasYMax = canvasY+canvas.height;
             var mouseDown = false;
+            ctx.lineWidth = 1;
+            var lastPos = {
+                x: 1,
+                y: 1,
+                s: 0   
+            };
             
             window.addEventListener('mousedown', function (e) {
                 mouseDown = true;
+                ctx.beginPath();
+                ctx.fillStyle = 'rgba(0,0,255,0.5)';
             });
             window.addEventListener('mouseup', function (e) {
                 mouseDown = false;
@@ -34,7 +50,12 @@
                 if (mouseDown) {
                     hx = e.clientX - canvasPos.x;
                     hy = e.clientY - canvasPos.y;
+                    lastPos.x = hx;
+                    lastPos.y = hy;
+                    lastpos.s = ()
                     ctx.fillRect(hx,hy,1,1);
+                    ctx.lineTo((hx),(hy));
+                    ctx.stroke();
                 };
                 
             });
