@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>Kolmas</title>
+        <style>
+            #canvas {
+                border: 1px solid #000
+            }
+        </style>
+    </head>
+    <body>        
+        <canvas id='canvas' width="500" height="500"></canvas>
+        <script>
+            var create_ball = function () {
+
+
+            };
+            var canvas = document.getElementById('canvas')
+            var ctx = canvas.getContext('2d');
+
+            var pall1 = {
+                x: parseInt(Math.random() * canvas.width),
+                y: parseInt(Math.random() * canvas.height),
+                r: parseInt(100 + Math.random() * 20),
+                v: 'red'
+            };
+            var pall2 = {
+                x: parseInt(Math.random() * canvas.width),
+                y: parseInt(Math.random() * canvas.height),
+                r: parseInt(100 + Math.random() * 20),
+                v: 'blue'
+            };
+            // pallid array
+            var pallid = [pall1,pall2];
+
+            // loop pallide suurus
+            for (var i = 0;i < pallid.length;i++) {
+                var pall = pallid[i];
+                ctx.beginPath();
+                ctx.fillStyle = pall.v;
+                ctx.arc(pall.x,pall.y,pall.r,0,(2*Math.PI));
+                ctx.fill();
+            };
+
+            var kaugusx = pall1.x - pall2.x;
+            var kaugusy = pall1.y - pall2.y;
+
+            var kaugus = Math.sqrt((kaugusx*kaugusx)+(kaugusy*kaugusy))-(pall1.r+pall2.r);
+
+            if (kaugus <= 0) {
+                console.log('pihtas');
+            };
+
+            
+        </script>
+    </body>
+</html>

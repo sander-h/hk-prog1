@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport">
-        <title>Esimene</title>
+        <title>Teine</title>
         <style>
             #canvas {
                 border: 1px solid #000
@@ -11,7 +11,9 @@
         </style>
     </head>
     <body>
-        <canvas id='canvas' width="500" height="300"></canvas>
+        <header id ='header'></header>
+        
+        <canvas id='canvas' width="500" height="500"></canvas>
         <script>
             var canvas = document.getElementById('canvas')
             var ctx = canvas.getContext('2d');
@@ -60,7 +62,7 @@
             ctx.fillStyle = 'rgba(0,0,255,0.5)';
             ctx.arc(200,200,50,0,(0.5*Math.PI),true);
             ctx.lineTo((canvas.width),(canvas.height));
-            ctx.stroke();
+            //ctx.stroke(); // disabled
 
             // tekst
             ctx.fillStyle = 'rgb(0,0,0)';
@@ -71,6 +73,28 @@
             ctx.textBaseline = 'hanging';
             ctx.fillText(txt,txtWidth+5,5);
             console.log(ctx.measureText(txt));
+
+            // pilt
+            //var koala = document.createElement('img',);
+            //var src = document.getElementById('header');
+            //src.appendChild(koala);
+
+            //var img_koala = document.getElementById('img_koala');
+            //ctx.drawImage(img_koala,200,200,200,200);
+            
+            //1
+            /*
+            window.onLoad = function () {
+                var img_koala = document.getElementById('img_koala');
+                ctx.drawImage(img_koala,100,100);
+            };
+            */
+            //2
+            var img = new Image();
+            img.src = 'Koala.jpg';
+            window.onload = function() {
+                ctx.drawImage(img,150,150,100,100);
+            }
 
         </script>
     </body>
