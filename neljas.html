@@ -16,8 +16,30 @@
             var canvas = document.getElementById('canvas')
             var ctx = canvas.getContext('2d');
             
-
+            var hx,hy;
+            var canvasPos = canvas.getBoundingClientRect();
+            var canvasX = canvasPos.x;
+            var canvasY = canvasPos.y;
+            var canvasXMax = canvasX+canvas.width;
+            var canvasYMax = canvasY+canvas.height;
+            var mouseDown = false;
             
+            window.addEventListener('mousedown', function (e) {
+                mouseDown = true;
+            });
+            window.addEventListener('mouseup', function (e) {
+                mouseDown = false;
+            });
+            window.addEventListener('mousemove', function (e) {
+                if (mouseDown) {
+                    hx = e.clientX - canvasPos.x;
+                    hy = e.clientY - canvasPos.y;
+                    ctx.fillRect(hx,hy,1,1);
+                };
+                
+            });
+
+
         </script>
     </body>
 </html>
