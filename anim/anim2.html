@@ -15,6 +15,7 @@
         <script>
             var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
+            var canvasPos = canvas.getBoundingClientRect();
 
             var ruut = {
                 x:0,
@@ -25,8 +26,8 @@
                 spdy:0,
                 velx:0,
                 vely:0,
-                frictx:0.01,
-                fricty:0.01
+                frictx:0.1,
+                fricty:0.1
             };
             var spdx = 0;
             var spdy = 0;
@@ -43,25 +44,62 @@
                 if (!velxpos) {
                     obj.velx *= -1;
                 };
-                obj.velx = Math.max(((obj.velx-obj.frictx) - (obj.velx / 10)),0);
+                obj.velx = Math.max(((obj.velx-obj.frictx)/* - (obj.velx / 10)*/),0);
 
                 if (!velxpos) {
                     obj.velx = -(obj.velx);
                 };
 
-                // if x pos is out of the canvas, move it to the edge
+                // if x pos is out of the canvas(right side), move it to the edge
                 if ((newX+obj.w) > max) {
+                    
+                    // calculate difference from max
                     newX = newX - (newX - max)-obj.w;
                     obj.velx = (obj.velx - obj.velx*2)/*+(max-newX)*/;
                 };
                 
                 // if x pos is out of canvas move to edge
                 if (newX < 0) {
-
+                    newX = newX - newX;
+                    obj.velx = obj.velx - obj.velx*2;
                 };
 
                 // update x
                 obj.x = newX;
+
+                
+
+                // add speed for y pos
+                var newY = (obj.y + spdy + obj.spdy + obj.vely);
+
+                // velocity will be reduced
+                var velypos = (obj.vely >= 0);
+
+                if (!velypos) {
+                    obj.vely *= -1;
+                };
+                obj.vely = Math.max(((obj.vely-obj.fricty)),0);
+
+                if (!velypos) {
+                    obj.vely = -(obj.vely);
+                };
+
+                // if y pos is out of the canvas(bottom), move it to the bottom
+                if ((newY+obj.h) > may) {
+                    
+                    // calculate difference from max
+                    newY = newY - (newY - may)-obj.h;
+                    obj.vely = (obj.vely - obj.vely*2);
+                };
+                
+                // if y pos is out of canvas move to top
+                if (newY < 0) {
+                    newY = newY - newY;
+                    obj.vely = obj.vely - obj.vely*2;
+                };
+
+                // update y
+                obj.y = newY;
             };
 
             function f_draw() {
@@ -75,6 +113,20 @@
             };
             
             requestAnimationFrame(f_draw);
+            
+            window.addEventListener('mousedown', function (e) {
+                var hx = e.clientX - canvasPos.x;
+                var hy = e.clientY - canvasPos.y;
+                
+                var target = ruut;
+                var kaugusx = hx - target.x;
+                var kaugusy = hy - target.y;
+
+                var dist = Math.sqrt((kaugusx*kaugusx)+(kaugusy*kaugusy));
+
+                target.velx = -(kaugusx/10);
+                target.vely = -(kaugusy/10);
+            });
         </script>
     </body>
 </html>
