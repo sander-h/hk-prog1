@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>anim</title>
+        <style>
+            #canvas {
+                border: 1px solid #000
+            }
+        </style>
+    </head>
+    <body>        
+        <canvas id='canvas' width="500" height="500"></canvas>
+        <script>
+            var canvas = document.getElementById('canvas')
+            var ctx = canvas.getContext('2d');
+
+            var ruut = {x:0,y:0,w:20,h:20,mod:30};
+            var dir = true;
+            var mod = ruut.mod;
+            var mod2 = 0.1;
+
+            var gravity = 0.98;
+            var bounce = 0.5;
+
+            function arvuta() {
+                ruut.kiirus += gravity;
+                ruut.y += ruut.kiirus;
+
+                if (ruut.y + ruut.h > canvas.height) {
+                    ruut.y = canvas.height - ruut.h;
+                    ruut.kiirus = -ruut.kiirus * bounce;
+                };
+            };
+
+            function f_draw() {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillRect(ruut.x,ruut.y,ruut.w,ruut.h);
+                
+                arvuta();
+
+                requestAnimationFrame(f_draw);
+                
+            };
+            
+            requestAnimationFrame(f_draw);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>anim</title>
+        <style>
+            #canvas {
+                border: 1px solid #000
+            }
+        </style>
+    </head>
+    <body>        
+        <canvas id='canvas' width="500" height="500"></canvas>
+        <script>
+            var canvas = document.getElementById('canvas')
+            var ctx = canvas.getContext('2d');
+            var canvasPos = canvas.getBoundingClientRect();
+
+            function pall (x=0,y=0,r=5) {
+                this.x = x;
+                this.y = y;
+                this.r = r;
+            };
+
+
+            function getDist(pos1,pos2) {
+                var kaugusx = pos1[0] - pos2[0];
+                var kaugusy = pos1[1] - pos2[1];
+
+                var kaugus = Math.sqrt((kaugusx*kaugusx)+(kaugusy*kaugusy));
+                return kaugus;
+            };
+
+            function arvuta() {
+
+            };
+
+            function f_draw() {
+
+                arvuta();
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
+                for (var i = 0;i < pallid.length; i++) {
+                    var pall = pallid[i];
+                    ctx.beginPath();
+                    ctx.arc(pall.x,pall.y,pall.r,0,2*Math.PI);
+                    ctx.fill();
+                };
+
+
+                requestAnimationFrame(f_draw);
+                
+            };
+
+            var pallid = [];
+            for (var i = 0; i<10;i++) {
+                var r = parseInt(10+Math.random()*20);
+                var x = parseInt(r+Math.random()*(canvas.width-r*2));
+                var y = parseInt(r+Math.random()*(canvas.height-r*2));
+                pallid.push(new pall(x,y,r));
+            };
+            var pall1 = new pall (20,50,30);
+            var pall2 = new pall (20,50,30);
+            
+            requestAnimationFrame(f_draw);
+            
+            
+            window.addEventListener('mousedown', function (e) {
+                var hx = e.clientX - canvasPos.x;
+                var hy = e.clientY - canvasPos.y;
+                //pallid.forEach(function (pall) {
+                for(var i = 0;i < pallid.length; i++) {
+                    var pall = pallid[i];
+                    var dist = getDist([hx,hy],[(pall.x),(pall.y)]);
+                    if (dist < pall.r) {
+                        pall.r = pall.r/2;
+                        if (pall.r < 10) {
+                            pallid.splice(i,1);
+                        };
+                    };
+                };
+                //});
+                
+            });
+        </script>
+    </body>
+</html>

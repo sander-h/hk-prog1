@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>anim</title>
+        <style>
+            #canvas {
+                border: 1px solid #000
+            }
+        </style>
+    </head>
+    <body>        
+        <canvas id='canvas' width="100" height="100"></canvas>
+        <script>
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+
+            var ruut = {
+                x:0,
+                y:0,
+                w:20,
+                h:20,
+                spdx:0,
+                spdy:0,
+                velx:0,
+                vely:0,
+                frictx:0.01,
+                fricty:0.01
+            };
+            var spdx = 0;
+            var spdy = 0;
+            
+            // function
+            function f_newPos(obj,spdx=0,spdy=0,max=100,may=100) {
+
+                // add speed for x pos
+                var newX = (obj.x + spdx + obj.spdx + obj.velx);
+
+                // velocity will be reduced
+                var velxpos = (obj.velx >= 0);
+
+                if (!velxpos) {
+                    obj.velx *= -1;
+                };
+                obj.velx = Math.max(((obj.velx-obj.frictx) - (obj.velx / 10)),0);
+
+                if (!velxpos) {
+                    obj.velx = -(obj.velx);
+                };
+
+                // if x pos is out of the canvas, move it to the edge
+                if ((newX+obj.w) > max) {
+                    newX = newX - (newX - max)-obj.w;
+                    obj.velx = (obj.velx - obj.velx*2)/*+(max-newX)*/;
+                };
+                
+                // if x pos is out of canvas move to edge
+                if (newX < 0) {
+
+                };
+
+                // update x
+                obj.x = newX;
+            };
+
+            function f_draw() {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillRect(ruut.x,ruut.y,ruut.w,ruut.h);
+                f_newPos(ruut,0,0);
+
+
+                requestAnimationFrame(f_draw);
+                
+            };
+            
+            requestAnimationFrame(f_draw);
+        </script>
+    </body>
+</html>
