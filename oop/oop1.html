@@ -15,10 +15,28 @@
         <script src="class/stage.js"></script>
         <script src="class/shape.js"></script>
         <script src="class/circle.js"></script>
+        <script src="class/rectangle.js"></script>
+        <script src="class/polygon.js"></script>
         <script>
             var stage = new Stage(document.getElementById("canvas"),300,300);
             var circle1 = new Circle(20,20,20);
-            stage.add(circle1);
+            var rect1 = new Rectangle(50,50,25,25);
+            var toAdd = [
+                new Circle(20,20,20),
+                new Rectangle(50,50,25,25),
+                new Circle(75,75,25),
+                new Circle(100,100,10),
+                new Circle(100,120,10),
+                new Circle(100,140,10),
+                new Circle(100,160,10),
+                new Polygon(150,150,50,6,0,color = 'red'),
+                new Polygon(150,150,50,3,0,color = 'orange'),
+                new Polygon(200,200,30,4,0,color = 'yellow'),
+                new Circle(200,200,5)
+            ];
+            stage.add(toAdd);
+            //stage.add(circle1);
+            //stage.add(rect1);
         </script>
     </body>
 </html>

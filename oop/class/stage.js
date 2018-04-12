@@ -12,7 +12,13 @@ class Stage {
 	}
 
 	add(obj) {
-		this.children.push(obj);
+		if (obj.length == null) {
+			this.children.push(obj);			
+		} else {
+			for(var i = 0; i < obj.length;i++) {
+				this.children.push(obj[i]);
+			};
+		}
 	}
 
 	draw(){
