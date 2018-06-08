@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>anim</title>
+        <style>
+            #canvas {
+                border: 1px solid #000
+            }
+        </style>
+    </head>
+    <body>        
+        <canvas id='canvas' width="500" height="500"></canvas>
+
+        <!-- Load classes -->
+        <script src="class/fun.js"></script>
+        <script src="class/stage.js"></script>
+        <script src="class/shape.js"></script>
+        <script src="class/circle.js"></script>
+        <script src="class/rectangle.js"></script>
+        <script src="class/polygon.js"></script>
+
+        <!-- main script -->
+        <script>
+            var stage = new Stage(document.getElementById("canvas"),500,500);
+            //var circle1 = new Circle({x:20,y:20,r:20});
+            //var rect1 = new Rectangle({x:50,y:50,w:25,h:25});
+            var toAdd = [
+                new Rectangle({x:0,y:400,w:300,h:100,desc:"lorem ipsum xxxx xxx lorem ipsum. lorem ipsum.",isClickable: true}),
+                new Rectangle(175,0,150,75),
+                new Rectangle(50,50,25,25,'green')
+
+
+                /*
+                new Circle(75,75,25),
+                new Circle(100,100,10),
+                new Circle(100,120,10),
+                new Circle(100,140,10),
+                new Circle(100,160,10),
+                new Polygon(150,150,50,6,0,color = 'red'),
+                new Polygon(150,150,50,3,0,color = 'orange'),
+                new Polygon(200,200,30,4,0,color = 'yellow'),
+                new Circle(200,200,5)
+                */
+            ];
+            stage.add(toAdd);
+            //stage.add(circle1);
+            //stage.add(rect1);
+
+            // mouse move 
+            window.onmousemove = function (e) {
+                window.mousePos = stage.mousePos(e);
+                //console.log(window.mousePos);
+            };
+            window.onmousedown = function (e) {
+                let pos = window.mousePos;
+                let button = e.button;
+                window.click = {
+                    pos: pos,
+                    button: button
+                };
+            };
+        </script>
+    </body>
+</html>
